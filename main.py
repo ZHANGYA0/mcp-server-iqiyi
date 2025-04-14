@@ -18,7 +18,7 @@ config.auth = os.getenv("IQIYI_AUTH", "")
 config.device = os.getenv("IQIYI_DEVICE", "")
 
 # Configure log directory and log file path
-log_dir = os.getenv("IQIYI_LOG_DIR", "D:/temp/logs")
+log_dir = os.getenv("IQIYI_LOG_DIR", "C:/temp/logs")
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 config.log_file_path = os.getenv("IQIYI_LOG_FILE", os.path.join(log_dir, "mcp-server-iqiyi.log"))
