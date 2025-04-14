@@ -37,6 +37,22 @@ Fetches the most popular videos.
 
 ---
 
+## Installation
+
+1. **Create a Virtual Environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+2. **Install Dependencies**
+   Install the required Python packages using `requirements.txt`:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
 ## Configuration Example
 
 Below is an example configuration for integrating this MCP server into your environment:
