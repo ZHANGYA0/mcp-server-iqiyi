@@ -1,4 +1,4 @@
-# MCP Server for iQiyi
+# MCP Server for iQiYi
 
 This project provides an MCP server implementation to access two iQiyi API endpoints:
 1. **Get New Releases**: Fetches the latest released videos.
