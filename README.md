@@ -13,6 +13,30 @@ The server is built using the `FastMCP` framework and exposes these functionalit
 - **Customizable Configuration**: Supports environment variables to configure user-specific parameters like `IQIYI_UID`, `IQIYI_AUTH`, and `IQIYI_DEVICE`.
 - **Customizable Logging**: Allows specifying a custom log directory and log file path.
 
+## Tools
+
+### `get_new_releases`
+
+Fetches the latest released videos.
+
+**Inputs:**
+- `count` (optional, integer): Number of videos to return (default: 14).
+
+**Returns:** A formatted string containing details of the latest released videos.
+
+---
+
+### `get_trending_videos`
+
+Fetches the most popular videos.
+
+**Inputs:**
+- `count` (optional, integer): Number of videos to return (default: 14).
+
+**Returns:** A formatted string containing details of the trending videos.
+
+---
+
 ## Configuration Example
 
 Below is an example configuration for integrating this MCP server into your environment:
@@ -39,6 +63,7 @@ Below is an example configuration for integrating this MCP server into your envi
         "IQIYI_AUTH": "<YOUR_AUTH_TOKEN>",
         "IQIYI_DEVICE": "<YOUR_DEVICE_ID>",
         "IQIYI_LOG_DIR": "D:/custom/logs",  // Optional: Custom log directory
+        "IQIYI_LOG_FILE": "D:/custom/logs/mcp-server-iqiyi.log"  // Optional: Custom log file path
       }
     }
   }
@@ -71,4 +96,4 @@ Logs are stored in the directory specified by the `IQIYI_LOG_DIR` environment va
 
 ## License
 
-This project is licensed under the MIT License.
+This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.
