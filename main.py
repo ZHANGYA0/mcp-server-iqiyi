@@ -88,7 +88,7 @@ async def get_trending_videos(count: int = 10) -> str:
     """Get trending videos based on play count.
     
     Args:
-        count: Number of videos to return (default 14)
+        count: Number of videos to return (default 10)
     """
     params = {
         "channelName": "recommend",
@@ -134,7 +134,7 @@ async def get_new_releases(count: int = 10) -> str:
     """Get newly released videos.
     
     Args:
-        count: Number of videos to return (default 14)
+        count: Number of videos to return (default 10)
     """
     params = {
         "channelName": "recommend",
@@ -170,6 +170,49 @@ async def get_new_releases(count: int = 10) -> str:
         
     formatted_videos = [format_video(video) for video in videos[:count]]
     return "\n---\n".join(formatted_videos)
+
+    @mcp.tool()
+    async def get_video_by_id(video_id: str) -> str:
+        """Get detailed information about a specific video by its ID.
+        
+        Args:
+            video_id: The unique ID of the video to look up
+        """
+        params = {
+            "id": video_id,
+            "pc": "1"  # 保持pc=1，其他参数全部去掉
+        }
+        
+        # 使用新的API端点
+        api_url = "https://mesh.if.iqiyi.com/portal/lw/v2/video/detail2"
+        
+        async with httpx.AsyncClient() as client:
+            try:
+                response = await client.get(
+                    api_url,
+                    params=params,
+                    headers=DEFAULT_HEADERS,
+                    timeout=10.0
+                )
+                response.raise_for_status()
+                video_data = response.json()
+                
+                # 提取核心信息
+                result = f"""
+                    Title: {video_data.get('title', 'Unknown')}
+                    Description: {video_data.get('desc', 'No description')}
+                    Duration: {video_data.get('duration', 'Unknown')} seconds
+                    Play URL: {video_data.get('page_url', 'No URL')}
+                    View Count: {video_data.get('play_count', 'Unknown')}
+                """
+                return result.strip()
+                
+            except httpx.HTTPStatusError as e:
+                logger.error(f"API request failed: {e.response.status_code}")
+                return f"API Error: {e.response.status_code}"
+            except Exception as e:
+                logger.error(f"Error fetching video details: {str(e)}")
+                return f"Error: {str(e)}"
 
 if __name__ == "__main__":
     # Initialize and run the server
